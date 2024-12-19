@@ -16,12 +16,19 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             List {
-                ForEach(viewModel.categories) { category in
-                    CategoryRowView(category: category, bestCard: viewModel.getBestCard(for: category))
+                if viewModel.categories.isEmpty {
+                    Section {
+                        Text("Add categories to start tracking your rewards!")
+                            .foregroundColor(.gray)
+                    }
+                } else {
+                    ForEach(viewModel.categories) { category in
+                        CategoryRowView(category: category, bestCard: viewModel.getBestCard(for: category))
+                    }
+                    .onDelete(perform: viewModel.deleteCategory)
                 }
-                .onDelete(perform: viewModel.deleteCategory)
             }
-            .navigationTitle("CCM")
+            .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     NavigationLink("Cards") {

@@ -13,11 +13,24 @@ class RewardsViewModel: ObservableObject {
         }
     }
     
+    // Predefined categories that users can choose from
+    let predefinedCategories = [
+        Category(name: "Gas", icon: "fuelpump.fill"),
+        Category(name: "Groceries", icon: "cart.fill"),
+        Category(name: "Online Shopping", icon: "bag.fill"),
+        Category(name: "Travel", icon: "airplane"),
+        Category(name: "Dining", icon: "fork.knife"),
+        Category(name: "Entertainment", icon: "tv.fill"),
+        Category(name: "Healthcare", icon: "cross.case.fill"),
+        Category(name: "Education", icon: "book.fill"),
+        Category(name: "Transit", icon: "bus.fill"),
+        Category(name: "Utilities", icon: "bolt.fill")
+    ]
+    
     init() {
         loadData()
     }
     
-    // MARK: - Persistence Methods
     private func saveCards() {
         if let encoded = try? JSONEncoder().encode(cards) {
             UserDefaults.standard.set(encoded, forKey: "savedCards")
@@ -31,43 +44,14 @@ class RewardsViewModel: ObservableObject {
     }
     
     private func loadData() {
-        // Load categories
         if let savedCategories = UserDefaults.standard.data(forKey: "savedCategories"),
            let decodedCategories = try? JSONDecoder().decode([Category].self, from: savedCategories) {
             categories = decodedCategories
-        } else {
-            // Load default categories if no saved data exists
-            categories = [
-                Category(name: "Gas", icon: "fuelpump.fill"),
-                Category(name: "Groceries", icon: "cart.fill"),
-                Category(name: "Online Shopping", icon: "bag.fill"),
-                Category(name: "Travel", icon: "airplane"),
-                Category(name: "Dining", icon: "fork.knife"),
-                Category(name: "Entertainment", icon: "tv.fill")
-            ]
         }
         
-        // Load cards
         if let savedCards = UserDefaults.standard.data(forKey: "savedCards"),
            let decodedCards = try? JSONDecoder().decode([CreditCard].self, from: savedCards) {
             cards = decodedCards
-        } else {
-            // Load default cards if no saved data exists
-            cards = [
-                CreditCard(name: "Freedom Unlimited", cashbackRates: [
-                    categories[0]: 1.5,  // Gas
-                    categories[1]: 1.5,  // Groceries
-                    categories[2]: 3.0   // Online Shopping
-                ]),
-                CreditCard(name: "Sapphire Preferred", cashbackRates: [
-                    categories[3]: 5.0,  // Travel
-                    categories[4]: 3.0   // Dining
-                ]),
-                CreditCard(name: "Cash Plus", cashbackRates: [
-                    categories[1]: 6.0,  // Groceries
-                    categories[5]: 4.0   // Entertainment
-                ])
-            ]
         }
     }
     
@@ -84,7 +68,6 @@ class RewardsViewModel: ObservableObject {
     }
     
     func deleteCategory(at indexSet: IndexSet) {
-        // Remove the category from all cards' cashback rates before deleting
         let categoriesToDelete = indexSet.map { categories[$0] }
         for categoryToDelete in categoriesToDelete {
             for index in cards.indices {
@@ -100,5 +83,13 @@ class RewardsViewModel: ObservableObject {
     
     func deleteCard(at indexSet: IndexSet) {
         cards.remove(atOffsets: indexSet)
+    }
+    
+    func addCashbackToCard(_ card: CreditCard, category: Category, rate: Double) {
+        if let index = cards.firstIndex(where: { $0.id == card.id }) {
+            var updatedCard = card
+            updatedCard.cashbackRates[category] = rate
+            cards[index] = updatedCard
+        }
     }
 }
