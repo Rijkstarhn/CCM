@@ -35,14 +35,24 @@
 			path = CCM;
 			sourceTree = "<group>";
 		};
-		767A9C352D13B9B100D1B21E /* CCMTests */ = {
+		767A9C512D13BA1100D1B21E /* Models */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = CCMTests;
+			path = Models;
 			sourceTree = "<group>";
 		};
-		767A9C3F2D13B9B100D1B21E /* CCMUITests */ = {
+		767A9C652D13BB5400D1B21E /* Views */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = CCMUITests;
+			path = Views;
+			sourceTree = "<group>";
+		};
+		767A9C742D13BFB200D1B21E /* App */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = App;
+			sourceTree = "<group>";
+		};
+		767A9C752D13BFC800D1B21E /* ViewModels */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -75,9 +85,11 @@
 		767A9C142D13B9AF00D1B21E = {
 			isa = PBXGroup;
 			children = (
+				767A9C752D13BFC800D1B21E /* ViewModels */,
+				767A9C742D13BFB200D1B21E /* App */,
+				767A9C652D13BB5400D1B21E /* Views */,
+				767A9C512D13BA1100D1B21E /* Models */,
 				767A9C1F2D13B9AF00D1B21E /* CCM */,
-				767A9C352D13B9B100D1B21E /* CCMTests */,
-				767A9C3F2D13B9B100D1B21E /* CCMUITests */,
 				767A9C1E2D13B9AF00D1B21E /* Products */,
 			);
 			sourceTree = "<group>";
@@ -109,6 +121,10 @@
 			);
 			fileSystemSynchronizedGroups = (
 				767A9C1F2D13B9AF00D1B21E /* CCM */,
+				767A9C512D13BA1100D1B21E /* Models */,
+				767A9C652D13BB5400D1B21E /* Views */,
+				767A9C742D13BFB200D1B21E /* App */,
+				767A9C752D13BFC800D1B21E /* ViewModels */,
 			);
 			name = CCM;
 			packageProductDependencies = (
@@ -130,9 +146,6 @@
 			dependencies = (
 				767A9C342D13B9B100D1B21E /* PBXTargetDependency */,
 			);
-			fileSystemSynchronizedGroups = (
-				767A9C352D13B9B100D1B21E /* CCMTests */,
-			);
 			name = CCMTests;
 			packageProductDependencies = (
 			);
@@ -152,9 +165,6 @@
 			);
 			dependencies = (
 				767A9C3E2D13B9B100D1B21E /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				767A9C3F2D13B9B100D1B21E /* CCMUITests */,
 			);
 			name = CCMUITests;
 			packageProductDependencies = (
