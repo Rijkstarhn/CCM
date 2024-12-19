@@ -5,6 +5,7 @@
 //  Created by Rexxay on 2024-12-18.
 //
 
+// CategoryRowView.swift
 import SwiftUI
 
 struct CategoryRowView: View {

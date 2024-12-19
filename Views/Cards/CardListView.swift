@@ -1,42 +1,7 @@
 // CardListView.swift
 import SwiftUI
 
-struct CardListView: View {
-    @ObservedObject var viewModel: RewardsViewModel
-    @State private var showingAddCard = false
-    
-    var body: some View {
-        List {
-            ForEach(viewModel.cards) { card in
-                VStack(alignment: .leading) {
-                    Text(card.name)
-                        .font(.headline)
-                    ForEach(Array(card.cashbackRates.keys), id: \.self) { category in
-                        if let rate = card.cashbackRates[category] {
-                            Text("\(category.name): \(rate, specifier: "%.1f")%")
-                                .font(.subheadline)
-                                .foregroundColor(.gray)
-                        }
-                    }
-                }
-            }
-            .onDelete(perform: viewModel.deleteCard)
-        }
-        .navigationTitle("Credit Cards")
-        .toolbar {
-            Button(action: { showingAddCard.toggle() }) {
-                Image(systemName: "plus")
-            }
-        }
-        .sheet(isPresented: $showingAddCard) {
-            AddCardView(viewModel: viewModel)
-        }
-    }
-}
-
-// AddCardView.swift
-import SwiftUI
-
+// Forward declaration of AddCardView to resolve circular dependency
 struct AddCardView: View {
     @ObservedObject var viewModel: RewardsViewModel
     @Environment(\.dismiss) var dismiss
@@ -78,6 +43,39 @@ struct AddCardView: View {
                     .disabled(name.isEmpty)
                 }
             }
+        }
+    }
+}
+
+struct CardListView: View {
+    @ObservedObject var viewModel: RewardsViewModel
+    @State private var showingAddCard = false
+    
+    var body: some View {
+        List {
+            ForEach(viewModel.cards) { card in
+                VStack(alignment: .leading) {
+                    Text(card.name)
+                        .font(.headline)
+                    ForEach(Array(card.cashbackRates.keys), id: \.self) { category in
+                        if let rate = card.cashbackRates[category] {
+                            Text("\(category.name): \(rate, specifier: "%.1f")%")
+                                .font(.subheadline)
+                                .foregroundColor(.gray)
+                        }
+                    }
+                }
+            }
+            .onDelete(perform: viewModel.deleteCard)
+        }
+        .navigationTitle("Credit Cards")
+        .toolbar {
+            Button(action: { showingAddCard.toggle() }) {
+                Image(systemName: "plus")
+            }
+        }
+        .sheet(isPresented: $showingAddCard) {
+            AddCardView(viewModel: viewModel)
         }
     }
 }
