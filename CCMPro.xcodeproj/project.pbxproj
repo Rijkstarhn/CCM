@@ -35,16 +35,6 @@
 			path = CCMPro;
 			sourceTree = "<group>";
 		};
-		767A9CDA2D15F59200D1B21E /* CCMProTests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = CCMProTests;
-			sourceTree = "<group>";
-		};
-		767A9CE42D15F59200D1B21E /* CCMProUITests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = CCMProUITests;
-			sourceTree = "<group>";
-		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,8 +66,6 @@
 			isa = PBXGroup;
 			children = (
 				767A9CC42D15F59000D1B21E /* CCMPro */,
-				767A9CDA2D15F59200D1B21E /* CCMProTests */,
-				767A9CE42D15F59200D1B21E /* CCMProUITests */,
 				767A9CC32D15F59000D1B21E /* Products */,
 			);
 			sourceTree = "<group>";
@@ -130,9 +118,6 @@
 			dependencies = (
 				767A9CD92D15F59200D1B21E /* PBXTargetDependency */,
 			);
-			fileSystemSynchronizedGroups = (
-				767A9CDA2D15F59200D1B21E /* CCMProTests */,
-			);
 			name = CCMProTests;
 			packageProductDependencies = (
 			);
@@ -152,9 +137,6 @@
 			);
 			dependencies = (
 				767A9CE32D15F59200D1B21E /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				767A9CE42D15F59200D1B21E /* CCMProUITests */,
 			);
 			name = CCMProUITests;
 			packageProductDependencies = (
